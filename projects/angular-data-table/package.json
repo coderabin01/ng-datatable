@@ -1,0 +1,31 @@
+{
+  "name": "angular-data-table-library",
+  "version": "1.0.0", 
+  "description":"DataTable for Angular 2+",
+  "author": "Vishal Hasnani (hasnanivishal@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hasnanivishal/angular-datatable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hasnanivishal/angular-datatable/issues"
+  },
+  "homepage": "https://github.com/Hasnanivishal/angular-datatable",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "datatable",
+    "data-table",
+    "angular 6",
+    "sorting",
+    "table",
+    "filter",
+    "angular 7"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0"
+  }
+}

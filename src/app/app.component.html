@@ -1,0 +1,48 @@
+<!-- <app-datatable [data]='sampleData' [itemPerPage]='5' [color]='color'></app-datatable> -->
+
+<!-- [datasource], [tableColumns], [showActionField], [itemDeletedEmitter] , [class]-->
+
+<!-- [type]="client" -->
+<h2>MOCK TABLE</h2>
+<ang-data-table
+   [color]="'#2C3E50'"
+   [loading]="false"
+   [dataSource]='data' 
+   [itemPerPage]='dataPerPage2' 
+
+   [tableColumns]="questions"
+
+   [showActionField]="true"
+   (delete)="onDelete($event)"
+   (update)="onUpdate($event)"
+ ></ang-data-table>
+
+ <h2>TABLE 1(Employee Income)</h2>
+ <ang-data-table
+    [color]="'#2E86C1'"
+    [loading]="employeeLoading"
+    [dataSource]='employeeIncomeCode'
+    [itemPerPage]='dataPerPage'
+
+    [tableColumns]="employeeIncomeForm"
+
+    [showActionField]="true" 
+    
+    (delete)="onDeleteEmployeeCode($event)"
+    (update)="onUpdateEmployeeCode($event)"
+ ></ang-data-table>
+
+ <!-- (itemDeleteEmit) = "deleteEmployeeCode()" -->
+ <!-- (itemUpdateEmit) = "updateEmployeeCode()"-->
+
+ <h2>TABLE 2 (Pay Period)</h2>
+ <ang-data-table
+    [loading]="payPeriodLoading"
+    [dataSource]='payPeriod' 
+    [itemPerPage]='dataPerPage'
+    [tableColumns]="payPeriodForm"
+    [showActionField]="false" 
+ ></ang-data-table>
+
+ <!-- (deleteItem)="onDeletePayPeriod($event)"
+ (updateItem)="onUpdatePayPeriod($event)" -->

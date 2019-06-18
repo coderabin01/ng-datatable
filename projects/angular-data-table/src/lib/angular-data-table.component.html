@@ -1,0 +1,80 @@
+<div style="overflow-x:auto;">
+  <table>
+
+    <thead [style.background-color]="bgColor">
+      <th *ngFor="let prop of propName">
+        {{ (prop.label?  prop.label : prop)}}
+        <i *ngIf="prop.sort && pagedItems" class="fa fa-sort" (click)="sortDataByFieldName(prop.key, !sortOrder)"
+          (click)="sortOrder = !sortOrder"></i>
+        <div *ngIf="prop.search">
+          <input (keyup)="filterDataByFieldName($event, prop.key)" />
+          <!-- <select (change)="filter($event, prop.value)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select> -->
+        </div>
+      </th>
+      <th *ngIf="showActionField">
+        Action
+      </th>
+    </thead>
+
+    <tbody>
+      <ng-container *ngIf="loading">
+        Loading....
+      </ng-container>
+
+      <ng-container *ngIf="!loading && pagedItems">
+        <tr *ngFor="let item of pagedItems ">
+
+          <ng-container *ngIf="showSaveOption && itemToEdit._index === item._index">
+            <td *ngFor="let column of tableColumns">
+              <!-- change the component to dynamic form input && question to formControl -->
+              <lib-dynamic-form-question [question]="column" [form]="form"></lib-dynamic-form-question>
+            </td>
+          </ng-container>
+
+          <ng-container *ngIf="!showSaveOption || (itemToEdit && itemToEdit._index != item._index)">
+            <td *ngFor="let prop of propName">
+              {{ item[prop.key] ? item[prop.key] : item[prop]}}
+            </td>
+          </ng-container>
+
+          <td *ngIf="showActionField">
+            <!-- Use component logic -->
+            <ng-container *ngIf="!showSaveOption || (itemToEdit && itemToEdit._index != item._index)">
+              <span (click)="onEdit(item)"> Edit </span> | <span (click)="onDelete(item)"> Delete </span>
+            </ng-container>
+
+            <!-- Use component logic -->
+            <ng-container *ngIf="showSaveOption && itemToEdit._index === item._index">
+              <span (click)="onSave(item)"> Save </span> | <span (click)="onCancelEdit(item)"> Cancel </span>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+
+      <ng-container *ngIf="!loading && pagedItems?.length === 0">No Results</ng-container>
+    </tbody>
+  </table>
+</div>
+
+<br />
+<div class="pagination-section" *ngIf="!loading && pagedItems?.length > 0">
+
+  <div class="two">Showing {{pagedItems[0]?._index}} to
+    {{pagedItems[pagedItems?.length-1]?._index}} of
+    {{filteredData?.length > 0 ? filteredData?.length : totalItems}} entries
+  </div>
+
+  <div class="pagination" *ngIf="pager.pages && pager.pages.length > 1">
+    <a [class.disabled]="currentPage === 1" (click)="previousPage()">&laquo;</a>
+    <a [ngClass]="{'active': currentPage === page}" *ngFor="let page of pager.pages" (click)="setPage(page)">{{page}}
+    </a>
+    <a [class.disabled]="currentPage === pager.totalPages" (click)="nextPage()">&raquo;</a>
+  </div>
+</div>
+
+<!-- CSS -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- CSS -->

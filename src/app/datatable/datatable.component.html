@@ -1,0 +1,119 @@
+<!-- <div class="header">
+  <div class="two" *ngIf="pagedItems">Show
+    <select>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="58">25</option>
+      <option value="100">100</option>
+    </select> entries
+  </div>
+
+  <div class="one" *ngIf="pager.pages && pager.pages.length > 1">
+    Search: <input type="text">
+  </div>
+</div> -->
+
+<div *ngIf="pagedItems">
+
+
+  <div style="overflow-x:auto;">
+    <table>
+      <thead>
+        <th *ngFor="let prop of propName | keyvalue" [style.background-color]="bgColor">
+          {{ prop.value | titlecase }} <i class="fa fa-sort" (click)="Sorting(prop.value, !sortOrder)" (click)="sortOrder = !sortOrder"></i></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pagedItems ">
+          <td *ngFor="let prop of propName"> {{ item[prop] }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br />
+  <div class="header" style="overflow-x:auto;">
+    <div class="two" *ngIf="pagedItems">Showing {{pagedItems[0]._index}} to
+      {{pagedItems[pagedItems.length-1]._index}} of
+      {{totalItems}} entries</div>
+
+    <div class="one" *ngIf="pager.pages && pager.pages.length > 1">
+      <button class="button button2" [style.background-color]="bgColor" (click)="previousPage()">Previous</button>
+      <button class="button button2" [style.background-color]="bgColor" (click)="nextPage()">Next</button>
+    </div>
+  </div>
+
+  <div class="center">
+    Page {{pager.currentPage}}
+  </div>
+
+</div>
+
+
+<!-- CSS -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+  table,
+  td,
+  th {
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 15px;
+  }
+
+  th {
+    /* background-color: #24292e; */
+    color: white;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .button {
+    /* background-color: #24292e; */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+  }
+
+  .button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .center {
+    text-align: center;
+  }
+
+
+  .header {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .one {
+    float: right;
+  }
+
+  .two {
+    float: left;
+  }
+</style>
+<!-- CSS -->
